@@ -199,6 +199,7 @@ void MVKCommandBuffer::checkDeferredEncoding() {
 			MVKCommandEncoder encoder(this);
 			encoder.encode(_prefilledMTLCmdBuffer, &encodingContext);
 
+			[_prefilledMTLCmdBuffer retain];
 			// Once encoded onto Metal, if this command buffer is not reusable, we don't need the
 			// MVKCommand instances anymore, so release them in order to reduce memory pressure.
 			if ( !_isReusable ) { releaseRecordedCommands(); }

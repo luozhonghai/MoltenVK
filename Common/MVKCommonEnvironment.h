@@ -62,12 +62,13 @@ extern "C" {
 #	define MVK_TVOS					TARGET_OS_TV
 #endif
 
+//new: TARGET_OS_VISION
 /** Building for visionOS. */
 #ifndef TARGET_OS_XR
 #	define TARGET_OS_XR				0		// Older SDK's don't define TARGET_OS_XR
 #endif
 #ifndef MVK_VISIONOS
-#	define MVK_VISIONOS				TARGET_OS_XR
+#	define MVK_VISIONOS				TARGET_OS_VISION
 #endif
 
 /** Building for iOS or tvOS. */

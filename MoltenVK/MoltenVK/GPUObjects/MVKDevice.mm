@@ -4547,6 +4547,13 @@ void MVKDevice::getMetalObjects(VkExportMetalObjectsInfoEXT* pMetalObjectsInfo) 
 				}
 				break;
 			}
+			case VK_STRUCTURE_TYPE_EXPORT_METAL_COMMAND_BUFFER_INFO_EXT: {
+				auto* pCommandBuffInfo = (VkExportMetalCommandBufferInfoEXT*)next;
+				MVKCommandBuffer* mvkCommandBuffer = MVKCommandBuffer::getMVKCommandBuffer(pCommandBuffInfo->commandBuffer);
+				//MVKCommandPool* mvkCmdPool = mvkCommandBuffer->getCommandPool();
+				pCommandBuffInfo->mtlCommandBuffer = mvkCommandBuffer->getMTLCmdBuffer();
+				break;
+			}
 			default:
 				break;
 		}

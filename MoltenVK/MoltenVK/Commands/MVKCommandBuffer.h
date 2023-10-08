@@ -148,6 +148,8 @@ public:
 	/** Called when a timestamp command is added. */
 	void recordTimestampCommand();
 
+	id<MTLCommandBuffer> getMTLCmdBuffer() { return _prefilledMTLCmdBuffer; }
+
 
 #pragma mark Tessellation constituent command management
 
