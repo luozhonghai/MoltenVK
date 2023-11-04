@@ -52,7 +52,7 @@ using namespace std;
 #endif
 
 // Mac Catalyst does not support feature sets, so we redefine them to GPU families in MVKDevice.h.
-#if MVK_MACCAT
+#if MVK_MACCAT || MVK_VISIONOS
 #define supportsMTLFeatureSet(MFS)	[_mtlDevice supportsFamily: MTLFeatureSet_ ##MFS]
 #else
 #define supportsMTLFeatureSet(MFS)	[_mtlDevice supportsFeatureSet: MTLFeatureSet_ ##MFS]
@@ -1918,6 +1918,14 @@ void MVKPhysicalDevice::initMetalFeatures() {
     }
 #endif
 
+//work around for vision os simulator
+#if MVK_VISIONOS
+	_metalFeatures.arrayOfTextures = true;
+
+	//>= apple2 gpu family
+	_metalFeatures.nativeTextureSwizzle = true;  
+#endif
+
 #endif
 
 #if MVK_MACOS
@@ -2873,7 +2881,7 @@ uint32_t MVKPhysicalDevice::getHighestGPUCapability() {
 	}
 
 	// Fall back to legacy feature sets on older OS's
-#if MVK_IOS
+#if MVK_IOS || MVK_VISIONOS
 	uint32_t maxFS = (uint32_t)MTLFeatureSet_iOS_GPUFamily5_v1;
 	uint32_t minFS = (uint32_t)MTLFeatureSet_iOS_GPUFamily1_v1;
 #endif

@@ -1510,6 +1510,13 @@ void MVKPixelFormats::modifyMTLFormatCapabilities() {
 #define addFeatSetMTLVtxFmtCaps(FEAT_SET, MTL_FMT, CAPS)  \
 	addMTLVertexFormatCapabilities(mtlDevice, MTLFeatureSet_ ##FEAT_SET, 11.0, MTLVertexFormat ##MTL_FMT, kMVKMTLFmtCaps ##CAPS)
 
+#elif MVK_VISIONOS
+#define addFeatSetMTLPixFmtCaps(FEAT_SET, MTL_FMT, CAPS)  \
+	addMTLPixelFormatCapabilities(mtlDevice, MTLFeatureSet_ ##FEAT_SET, 1.0, MTLPixelFormat ##MTL_FMT, kMVKMTLFmtCaps ##CAPS)
+
+#define addFeatSetMTLVtxFmtCaps(FEAT_SET, MTL_FMT, CAPS)  \
+	addMTLVertexFormatCapabilities(mtlDevice, MTLFeatureSet_ ##FEAT_SET, 1.0, MTLVertexFormat ##MTL_FMT, kMVKMTLFmtCaps ##CAPS)
+
 #else
 #define addFeatSetMTLPixFmtCaps(FEAT_SET, MTL_FMT, CAPS)  \
 	addMTLPixelFormatCapabilities(mtlDevice, MTLFeatureSet_ ##FEAT_SET, MTLPixelFormat ##MTL_FMT, kMVKMTLFmtCaps ##CAPS)
@@ -2018,13 +2025,17 @@ void MVKPixelFormats::buildVkFormatMaps() {
 			if (vkDesc.needsSwizzle()) {
 				if (_physicalDevice) {
 					id<MTLDevice> mtlDev = _physicalDevice->getMTLDevice();
+					bool supportsNativeTextureSwizzle = false;
 #if MVK_MACCAT
-					bool supportsNativeTextureSwizzle = [mtlDev supportsFamily: MTLGPUFamilyMacCatalyst2];
+					supportsNativeTextureSwizzle = [mtlDev supportsFamily: MTLGPUFamilyMacCatalyst2];
 #elif MVK_MACOS
-					bool supportsNativeTextureSwizzle = mvkOSVersionIsAtLeast(10.15) && [mtlDev supportsFeatureSet: MTLFeatureSet_macOS_GPUFamily2_v1];
+					supportsNativeTextureSwizzle = mvkOSVersionIsAtLeast(10.15) && [mtlDev supportsFeatureSet: MTLFeatureSet_macOS_GPUFamily2_v1];
 #endif
 #if MVK_IOS || MVK_TVOS
-					bool supportsNativeTextureSwizzle = mtlDev && mvkOSVersionIsAtLeast(13.0);
+					supportsNativeTextureSwizzle = mtlDev && mvkOSVersionIsAtLeast(13.0);
+#endif
+#if MVK_VISIONOS
+					supportsNativeTextureSwizzle = true;
 #endif
 					if (!supportsNativeTextureSwizzle && !mvkConfig().fullImageViewSwizzle) {
 						vkDesc.mtlPixelFormat = vkDesc.mtlPixelFormatSubstitute = MTLPixelFormatInvalid;
@@ -2135,7 +2146,10 @@ void MVKPixelFormats::setFormatProperties(MVKVkFormatDesc& vkDesc) {
 #if MVK_MACCAT
 	bool supportsStencilFeedback = [mtlDev supportsFamily: MTLGPUFamilyMacCatalyst2];
 #endif
-#if MVK_IOS
+#if MVK_VISIONOS
+	bool supportsStencilFeedback = [mtlDev supportsFamily: MTLGPUFamilyApple2];
+#endif
+#if MVK_IOS && !MVK_VISIONOS
 	bool supportsStencilFeedback = [mtlDev supportsFeatureSet: MTLFeatureSet_iOS_GPUFamily5_v1];
 #endif
 #if MVK_TVOS

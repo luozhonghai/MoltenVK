@@ -60,7 +60,7 @@
  * (IPHONEOS_DEPLOYMENT_TARGET) build setting to 11.0 or greater when building
  * MoltenVK, and any app that uses IOSurfaces.
  */
-#if MVK_MACOS
+#if MVK_MACOS || MVK_VISIONOS
 #	define MVK_SUPPORT_IOSURFACE_BOOL    1
 #endif
 
@@ -99,7 +99,10 @@ void mvkSetConfig(const MVKConfiguration& mvkConfig);
 #if MVK_MACOS
 #   define MVK_CONFIG_MTLEVENT_MIN_OS  10.14
 #endif
-#if MVK_IOS_OR_TVOS
+
+#if MVK_VISIONOS
+#   define MVK_CONFIG_MTLEVENT_MIN_OS  1.0
+#elif MVK_IOS_OR_TVOS
 #   define MVK_CONFIG_MTLEVENT_MIN_OS  12.0
 #endif
 #ifndef MVK_CONFIG_SYNCHRONOUS_QUEUE_SUBMITS

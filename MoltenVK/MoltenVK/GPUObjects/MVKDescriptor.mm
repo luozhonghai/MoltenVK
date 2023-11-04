@@ -469,7 +469,7 @@ void MVKDescriptorSetLayoutBinding::addMTLArgumentDescriptors(NSMutableArray<MTL
 void MVKDescriptorSetLayoutBinding::addMTLArgumentDescriptor(NSMutableArray<MTLArgumentDescriptor*>* args,
 															 uint32_t argIndex,
 															 MTLDataType dataType,
-															 MTLArgumentAccess access) {
+															 MTLBindingAccess access) {
 	uint32_t descCnt = getDescriptorCount();
 	if (descCnt == 0) { return; }
 	

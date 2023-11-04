@@ -1078,4 +1078,28 @@ bool mvkSupportsBCTextureCompression(id<MTLDevice> mtlDevice);
 #define MTLFeatureSet_macOS_GPUFamily1_v4		MTLGPUFamilyMacCatalyst1
 
 #define MTLFeatureSet_macOS_GPUFamily2_v1		MTLGPUFamilyMacCatalyst2
+
+#elif MVK_VISIONOS
+#define MTLFeatureSet_iOS_GPUFamily1_v1         MTLGPUFamilyApple1
+#define MTLFeatureSet_iOS_GPUFamily1_v2         MTLGPUFamilyApple1
+#define MTLFeatureSet_iOS_GPUFamily1_v3         MTLGPUFamilyApple1
+#define MTLFeatureSet_iOS_GPUFamily1_v4         MTLGPUFamilyApple1
+#define MTLFeatureSet_iOS_GPUFamily1_v5         MTLGPUFamilyApple1
+
+#define MTLFeatureSet_iOS_GPUFamily2_v1         MTLGPUFamilyApple2
+#define MTLFeatureSet_iOS_GPUFamily2_v2         MTLGPUFamilyApple2
+#define MTLFeatureSet_iOS_GPUFamily2_v3         MTLGPUFamilyApple2
+#define MTLFeatureSet_iOS_GPUFamily2_v4         MTLGPUFamilyApple2
+#define MTLFeatureSet_iOS_GPUFamily2_v5         MTLGPUFamilyApple2
+
+#define MTLFeatureSet_iOS_GPUFamily3_v1         MTLGPUFamilyApple3
+#define MTLFeatureSet_iOS_GPUFamily3_v2         MTLGPUFamilyApple3
+#define MTLFeatureSet_iOS_GPUFamily3_v3         MTLGPUFamilyApple3
+#define MTLFeatureSet_iOS_GPUFamily3_v4         MTLGPUFamilyApple3
+
+#define MTLFeatureSet_iOS_GPUFamily4_v1         MTLGPUFamilyApple4
+#define MTLFeatureSet_iOS_GPUFamily4_v2         MTLGPUFamilyApple4
+
+#define MTLFeatureSet_iOS_GPUFamily5_v1         MTLGPUFamilyApple5
+
 #endif

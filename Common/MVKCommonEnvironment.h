@@ -48,6 +48,9 @@ extern "C" {
 #endif
 
 /** Building for iOS. */
+//!!!! issue
+// xrsimulator of xcode 15 beta8 TARGET_OS_IOS 1
+// xrsimulator of xcode 15.1 beta TARGET_OS_IOS 0
 #ifndef MVK_IOS
 #	define MVK_IOS					(TARGET_OS_IOS && !TARGET_OS_MACCATALYST)
 #endif
@@ -73,7 +76,7 @@ extern "C" {
 
 /** Building for iOS or tvOS. */
 #ifndef MVK_IOS_OR_TVOS
-#	define MVK_IOS_OR_TVOS			(MVK_IOS || MVK_TVOS)
+#	define MVK_IOS_OR_TVOS			(MVK_IOS || MVK_TVOS || MVK_VISIONOS)
 #endif
 
 /** Building for macOS or iOS. */

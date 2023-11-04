@@ -174,7 +174,7 @@ protected:
 	void addMTLArgumentDescriptor(NSMutableArray<MTLArgumentDescriptor*>* args,
 								  uint32_t argIndex,
 								  MTLDataType dataType,
-								  MTLArgumentAccess access);
+								  MTLBindingAccess access);
 	bool isUsingMetalArgumentBuffer();
 	void populateShaderConversionConfig(mvk::SPIRVToMSLConversionConfiguration& shaderConfig,
 										MVKShaderResourceBinding& dslMTLRezIdxOffsets,
