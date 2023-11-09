@@ -1924,6 +1924,7 @@ void MVKPhysicalDevice::initMetalFeatures() {
 
 	//>= apple2 gpu family
 	_metalFeatures.nativeTextureSwizzle = true;  
+	_metalFeatures.depthSampleCompare = true;
 #endif
 
 #endif

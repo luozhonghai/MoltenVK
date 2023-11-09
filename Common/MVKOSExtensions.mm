@@ -26,7 +26,7 @@
 
 #import <Foundation/Foundation.h>
 
-
+#include <iostream>
 using namespace std;
 
 MVKOSVersion mvkOSVersion() {
@@ -35,6 +35,7 @@ MVKOSVersion mvkOSVersion() {
 		NSOperatingSystemVersion osVer = [[NSProcessInfo processInfo] operatingSystemVersion];
 		_mvkOSVersion = mvkMakeOSVersion((uint32_t)osVer.majorVersion, (uint32_t)osVer.minorVersion, (uint32_t)osVer.patchVersion);
 	}
+	//std::cout << "mvkOSVersion: " << _mvkOSVersion << std::endl;
 	return _mvkOSVersion;
 }
 
