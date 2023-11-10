@@ -1920,7 +1920,9 @@ void MVKPhysicalDevice::initMetalFeatures() {
 
 //work around for vision os simulator
 #if MVK_VISIONOS
+	//simulator may not support
 	_metalFeatures.arrayOfTextures = true;
+	_metalFeatures.layeredRendering = true;
 
 	//>= apple2 gpu family
 	_metalFeatures.nativeTextureSwizzle = true;  
